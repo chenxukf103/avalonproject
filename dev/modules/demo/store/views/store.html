@@ -1,0 +1,5 @@
+<span ms-controller="stroe">
+  <li ms-repeat="array">{{el.name}}:{{el.value}} &nbsp;<a href="javascript:void 0" 
+  		ms-click="remove(el, $remove)">remove</a></li>
+  <p ms-class="cookieerror: error">name:<input ms-duplex="name">&nbsp;value:<input ms-duplex="value"/> <button ms-click="add" type="button">add</button></p>
+</span>

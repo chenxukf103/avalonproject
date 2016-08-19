@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>avalon</title>
+	<meta charset="utf-8">
+	<link type="text/css" rel="stylesheet" href="resources/css/base.css"/>
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" href="resources/fonts/font-awesome/css/font-awesome-ie7.min.css">
+	<![endif]-->  
+	<script src="resources/lib/require/require.js" data-main="main.js"></script>
+	<style>
+        .ms-controller{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body ms-controller="root" class ="ms-controller">
+	<div class="header" ms-include-src="'common/templates/header.html'"></div>
+	<div class="main">
+		<div class="main-left" ms-css-height="{{leftHeight}}px" ms-css-width="{{leftWidth}}px">
+			<div  ms-include-src="'common/templates/submenu.html'"></div>
+		</div>
+		<div class="main-content" ms-css-margin-left="{{leftWidth}}px">
+		  	<div class="breadcrumb-box" ms-include-src="'common/templates/breadcrumb.html'"></div>
+		  	<div class="content-view" ms-view></div>
+		</div>
+	</div>
+</body> 
+</html>
