@@ -12,51 +12,59 @@
  avalon.history.start();
  });*/
 
-define([], function(){
+define([], function () {
     return {
         defaultPath: '/demo',
         routers: {
-            "demo":{
-                name:'开发参考',
-                data:{
+            "demo": {
+                name: '开发参考',
+                data: {
                     url: "/demo",
                     templateUrl: "common/templates/common-veiw.html"
                 }
             },
-            "demo.store":{
-                name:'本地存储',
-                data:{
+            "demo.store": {
+                name: '本地存储',
+                data: {
                     url: "/store",
                     templateUrl: "modules/demo/store/views/store.html",
-                    controllerUrl:["modules/demo/store/js/storeDemo.js"]
+                    controllerUrl: ["modules/demo/store/js/storeDemo.js"]
                 }
             },
-            "demo.dropdown":{
-                name:'下拉框',
-                data:{
+            "demo.dropdown": {
+                name: '下拉框',
+                data: {
                     url: "/dropdown",
                     templateUrl: "modules/demo/dropdown/views/dropdown.html",
-                    controllerUrl:"modules/demo/dropdown/js/dropdown.js"
+                    controllerUrl: "modules/demo/dropdown/js/dropdown.js"
                 }
             },
-            "demo.notice":{
-                name:"提示/提示消息",
-                data:{
-                    url:"/notice",
-                    templateUrl:"modules/demo/notice/views/notice.html",
-                    controllerUrl:"modules/demo/notice/js/notice.js"
+            "demo.notice": {
+                name: "提示/提示消息",
+                data: {
+                    url: "/notice",
+                    templateUrl: "modules/demo/notice/views/notice.html",
+                    controllerUrl: "modules/demo/notice/js/notice.js"
                 }
             },
-            "setting":{
-                name:'问卷配置',
-                data:{
+            "demo.spinner": {
+                name: "数字输入框",
+                data: {
+                    url: "/spinner",
+                    templateUrl: "modules/demo/spinner/views/spinner.html",
+                    controllerUrl: ["modules/demo/spinner/js/spinner.js"]
+                }
+            },
+            "setting": {
+                name: '问卷配置',
+                data: {
                     url: "/setting",
                     templateUrl: "common/templates/common-veiw.html"
                 }
             },
-            "setting.mgt":{
-                name:'问卷配置管理',
-                data:{
+            "setting.mgt": {
+                name: '问卷配置管理',
+                data: {
                     url: "/mgt",
                     templateUrl: "modules/demo/state2/state2.html"
                 }

@@ -1,3 +1,5 @@
 @import url('./oniui-common.css');
 @import url('./scrollbar/avalon.scrollbar.css');
 @import url('./dropdown/avalon.dropdown.css');
+@import url('./notice/avalon.notice.css');
+@import url('./spinner/avalon.spinner.css');

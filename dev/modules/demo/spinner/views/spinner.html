@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="../../../../../../../avalon.oniui-master/spinner/avalon.spinner.css"><h5>spinner demo</h5>
+<div>spinner默认步长为1，无范围限制，可以配置min设置spinner的最小值，配置max设置spinner的最大值，配置step设置spinner的步长；手动输入数值时，如输入了非数字字符，组件会将其置为change之前的数值，如设置了min或者max，组件会将输入值与mix、max对比，小于min则置为min，大于max则置为max</div>
+<div  ms-controller="spinnerDemo">
+    <fieldset>
+        <legend>基本的spinner</legend>
+        <input ms-duplex="p" ms-widget="spinner" id="test">
+    </fieldset>
+    <fieldset>
+        <legend>有范围限制的spinner,最小0,最大5</legend>
+        <input ms-duplex="p1" ms-widget="spinner, $spinner, $spinnerOpts">
+    </fieldset>
+    <fieldset>
+        <legend>步长为0.5的spinner</legend>
+        <input ms-duplex="p2" ms-widget="spinner, $step, $stepOpts">
+    </fieldset>
+</div>
