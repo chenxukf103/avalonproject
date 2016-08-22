@@ -9,7 +9,14 @@ define(['avalon'],function (avalon) {
         p2:1.0,
         $spinnerOpts:{
             min:0,
-            max:5
+            max:5,
+            onDecrease:function (value) {
+                avalon.log("this是触发事件的元素");
+                avalon.log(value);
+            },
+            onIncrease:function (value) {
+                avalon.log(value)
+            }
         },
         $stepOpts:{
             step:0.5
