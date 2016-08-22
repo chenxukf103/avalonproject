@@ -6,6 +6,7 @@ define(["resources/lib/oniui/avalon.getModel",
 		"resources/lib/oniui/scrollbar/avalon.scrollbar",
 		"resources/lib/oniui/dropdown/avalon.dropdown",
 		"resources/lib/oniui/notice/avalon.notice",
-		"resources/lib/oniui/spinner/avalon.spinner"
+		"resources/lib/oniui/spinner/avalon.spinner",
+		"resources/lib/oniui/dialog/avalon.dialog"
 
 	],function(){});

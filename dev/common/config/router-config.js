@@ -55,6 +55,14 @@ define([], function () {
                     controllerUrl: ["modules/demo/spinner/js/spinner.js"]
                 }
             },
+            "demo.dialog": {
+                name: "对话框",
+                data: {
+                    url: "/dialog",
+                    templateUrl: "modules/demo/dialog/views/dialog.html",
+                    controllerUrl: ["modules/demo/dialog/js/dialog.js"]
+                }
+            },
             "setting": {
                 name: '问卷配置',
                 data: {

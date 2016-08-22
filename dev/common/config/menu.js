@@ -6,7 +6,8 @@ define([], function () {
                 {resName: '下拉框', resCode: '0012', resValue: 'demo.dropdown'},
                 {resName: '日期范围', resCode: '0013', resValue: 'demo.coupledatepicker'},
                 {resName: '提示/提示消息', resCode: '0014', resValue: 'demo.notice'},
-                {resName: '数字输入框', resCode: '0016', resValue: 'demo.spinner'}]
+                {resName: '数字输入框', resCode: '0016', resValue: 'demo.spinner'},
+                {resName: '对话框', resCode: '0017', resValue: 'demo.dialog'}]
         },
         {
             resName: '问卷配置', resCode: '0020', resValue: 'setting',
