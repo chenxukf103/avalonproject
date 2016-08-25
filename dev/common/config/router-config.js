@@ -63,6 +63,14 @@ define([], function () {
                     controllerUrl: ["modules/demo/dialog/js/dialog.js"]
                 }
             },
+            "demo.validation": {
+                name: "验证组件",
+                data: {
+                    url: "/validation",
+                    templateUrl: "modules/demo/validation/views/validation.html",
+                    controllerUrl: ["modules/demo/validation/js/validation.js"]
+                }
+            },
             "setting": {
                 name: '问卷配置',
                 data: {

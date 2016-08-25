@@ -5,6 +5,12 @@ MS_OPTION_INNERWRAPPER
 <div class="oni-dialog-inner"></div>
 MS_OPTION_HEADER
 <div class="oni-dialog-header">
+    <div class="oni-dialog-close" ms-if="fullScreen" ms-click="_fullScreen">
+        <i>全屏</i>
+    </div>
+    <div class="oni-dialog-close" ms-if="returnOrigin" ms-click="_returnOrigin">
+        <i>还原</i>
+    </div>
     <div class="oni-dialog-close" ms-click="_close" ms-if="showClose">
         <i class="oni-icon oni-icon-times">&#xf003;</i>
     </div>
@@ -20,4 +26,4 @@ MS_OPTION_FOOTER
     </div>
 </div>
 MS_OPTION_LAYOUT_SIMULATE
-<div></div>
+<div class="aa"></div>
