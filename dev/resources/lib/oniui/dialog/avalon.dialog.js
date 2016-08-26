@@ -1,6 +1,6 @@
 // avalon 1.3.6
 /**
- * 
+ *
  * @cnName 对话框
  * @enName dialog
  * @introduce
@@ -10,7 +10,7 @@ define(["avalon",
     "text!./avalon.dialog.html"/*"../avalon.getModel",
     "text!./avalon.dialog.html",
     "../button/avalon.button",
-    "css!../chameleon/oniui-common.css", 
+    "css!../chameleon/oniui-common.css",
     "css!./avalon.dialog.css",
     "../draggable/avalon.draggable"*/
 ], function(avalon, sourceHTML) {
@@ -20,7 +20,7 @@ define(["avalon",
         maskLayer = avalon.parseHTML(_maskLayer).firstChild, // 遮罩层节点(dom node)
         maskLayerExist = false, // 页面不存在遮罩层就添加maskLayer节点，存在则忽略
         _maskLayerSimulate = template.split("MS_OPTION_LAYOUT_SIMULATE")[1],
-        maskLayerSimulate = avalon.parseHTML(_maskLayerSimulate).firstChild, 
+        maskLayerSimulate = avalon.parseHTML(_maskLayerSimulate).firstChild,
         dialogShows = [], //存在层上层时由此数组判断层的个数
         dialogNum = 0, //保存页面dialog的数量，当dialogNum为0时，清除maskLayer
         //IE6 userAgent Mozilla/4.0(compatible;MISE 6.0;Windows NT 6.1;...)
@@ -30,7 +30,7 @@ define(["avalon",
     var widget = avalon.ui.dialog = function(element, data, vmodels) {
         dialogNum++
         var options = data.dialogOptions
-        options.type = options.type.toLowerCase() 
+        options.type = options.type.toLowerCase()
         options.template = options.getTemplate(template, options)
         var _footerArr = options.template.split("MS_OPTION_FOOTER"),//
             _contentArr = _footerArr[0].split("MS_OPTION_CONTENT"),
@@ -109,68 +109,39 @@ define(["avalon",
                 maskLayerSimulate.style.zIndex = 2 * len + maxZIndex -1
                 element.style.zIndex =  2 * len + maxZIndex
                 if(updateZIndex) {
-                    return 
+                    return
                 }
                 document.documentElement.style.overflow = "hidden"
                 resetCenter(vmodel, element)
+                //suyc--addd--添加数组
+                returnDatas.push({
+                    $maskLayerCss:avalon(maskLayer).attr('style'),
+                    $maskLayerSimulateCss:avalon(maskLayerSimulate).attr('style'),
+                    $targetCss:avalon(element).attr('style')
+                });
                 // IE6下遮罩层无法覆盖select解决办法
                 if (isIE6 && selectLength && iFrame === null && vmodel.modal) {
                     iFrame = createIframe()
-                } else if(isIE6 && selectLength && vmodel.modal) { 
+                } else if(isIE6 && selectLength && vmodel.modal) {
                     iFrame.style.display = "block"
                     iFrame.style.width = maskLayer.style.width
                     iFrame.style.height = maskLayer.style.height
                     iFrame.style.zIndex = maskLayer.style.zIndex -1
                 }
                 //suyc add 20160824
-                vmodel.returnOrigin = false;
+                vmodel.returnOriginButton = false;
                 vmodel.onOpen.call(element, vmodel)
             }
             vm._fullScreen = function () {
-
-                var clientWidth, clientHeight,
-                    targetOffsetWidth, targetOffsetHeight,
-                    $maskLayer = avalon(maskLayer),
+                var clientHeight,
                     $maskLayerSimulate = avalon(maskLayerSimulate),
-                    $target = avalon(element),
-                    scrollTop, scrollLeft,
-                    documentElement,
-                    top = 0,
-                    left = 0;
-                if (!vmodel.toggle) return
-
-                documentElement = (document.compatMode && document.compatMode.toLowerCase() == "css1compat") ? document.documentElement : document.body
-                // clientWidth和clientHeight在现有浏览器都是兼容的(IE5),但在混杂模式下，得通过documentView属性提供宽度和高度
-                clientWidth = document.documentElement.clientWidth ? document.documentElement.clientWidth: document.body.clientWidth
-
+                    $target = avalon(element);
                 clientHeight = document.documentElement.clientHeight ? document.documentElement.clientHeight: document.body.clientHeight
-
-                //scrollTop = document.body.scrollTop + document.documentElement.scrollTop
-                //scrollLeft = documentElement.scrollLeft
-
-                targetOffsetWidth = element.offsetWidth
-                targetOffsetHeight = element.offsetHeight
-                if (vmodel.position === "absolute") {
-                   /* if (dialogShows.length > 1) {
-                        for (var i = 0; i < dialogShows.length -1; i++) {
-                            if (!isIE6) {
-                                dialogShows[i].widgetElement.style.display = "none"
-                            }
-                        }
-                    }*/
-                    $maskLayer.css({height: clientHeight, width: clientWidth, top: scrollTop, position: "absolute"})
-                    $maskLayerSimulate.css({height: clientHeight, width: clientWidth, top: scrollTop, overflow: "auto", position: "absolute"})
-                } else {
-                    /*if (dialogShows.length > 1) {
-                        for (var i = 0; i < dialogShows.length -1; i++) {
-                            dialogShows[i].widgetElement.style.display = "block"
-                        }
-                    }*/
-                    $maskLayer.css({height: "auto", width: "auto", top: 0, position: "fixed"})
+                if (!vmodel.toggle) return
+                if (!(vmodel.position === "absolute")) {
                     $maskLayerSimulate.css({height: "auto", width: "auto", top: 0, position: "static",left: "0",top: "0", bottom: "0", right: "0", filter: "alpha(opacity=60)"});
                 }
-                //需要改变内容的高度
-                $target.css({left: left, top: top,width:"100%"});
+                $target.css({left: "0", top: "0",width:"100%"});
                 var element_header = element.firstChild.children[0];
                 var element_content = element.firstChild.children[1];
                 var $element_content = avalon(element_content);
@@ -178,14 +149,23 @@ define(["avalon",
                 var element_content_padding = $element_content.innerHeight()-$element_content.height();
                 var element_content_height = clientHeight-avalon(element_header).outerHeight()-avalon(element_footer).outerHeight()-element_content_padding;
                 $element_content.css({height:element_content_height+"px"});
-                vmodel.fullScreen = false;
-                vmodel.returnOrigin = true;
+                vmodel.fullScreenButton = false;
+                vmodel.returnOriginButton = true;
             }
             vm._returnOrigin = function () {
-                vmodel.fullScreen = true;
-                vmodel.returnOrigin = false;
+                var $maskLayerSimulate = avalon(maskLayerSimulate),
+                    $target = avalon(element);
+                if(returnDatas.length>0) {
+                    $maskLayerSimulate.attr('style',returnDatas[0].$maskLayerSimulateCss);
+                    $target.attr('style',returnDatas[0].$targetCss);
+                    var element_content = element.firstChild.children[1];
+                    var $element_content = avalon(element_content);
+                    $element_content.css({height:"auto"});
+                    vmodel.fullScreenButton = true;
+                    vmodel.returnOriginButton = false;
+                }
             }
-            
+
             // 隐藏dialog
             vm._close = function(e) {
                 avalon.Array.remove(dialogShows, vm)
@@ -212,7 +192,7 @@ define(["avalon",
                     }
                     document.documentElement.style.overflow = ""
                     vmodel.onClose.call(element, vmodel)
-                    return 
+                    return
                 }
                 // 重置maskLayer的z-index,当最上层的dialog关闭，通过降低遮罩层的z-index来显示紧邻其下的dialog
                 var layoutZIndex = 2 * len + maxZIndex - 1
@@ -323,7 +303,7 @@ define(["avalon",
                         }
                     }
                 }
-                
+
                 vmodel.zIndex = vmodel.zIndex + vmodel.zIndexIncrementGlobal
                 vmodel.title = vmodel.title || "&nbsp;"
                 $element.addClass("oni-dialog")
@@ -402,19 +382,19 @@ define(["avalon",
          * @param vmodel {Object} 组件对应的Vmodel
          * @returns {Boolean} 如果return false，dialog不会关闭，用于异步操作
          */
-        onConfirm: avalon.noop, 
+        onConfirm: avalon.noop,
         /**
          * @config {Function} 定义显示dialog时的回调
          * @param vmodel {Object} 组件对应的Vmodel
          */
-        onOpen: avalon.noop, 
+        onOpen: avalon.noop,
         /**
          * @config {Function} 定义点击"取消"按钮后的回调操作
          * @param event {Object} 事件对象
          * @param vmodel {Object} 组件对应的Vmodel
          * @returns {Boolean} 如果return false，dialog不会关闭，用于异步操作
          */
-        onCancel: avalon.noop, 
+        onCancel: avalon.noop,
         /**
          * @config {Function} 定义点击"关闭"按钮后的回调操作
          * @param event {Object} 事件对象
@@ -422,15 +402,15 @@ define(["avalon",
          */
         onClose: avalon.noop, //点击右上角的“关闭”按钮的回调
         //@config 动态修改dialog的title,也可通过dialogVM.title直接修改
-        setTitle: avalon.noop, 
-        setContent: avalon.noop, 
+        setTitle: avalon.noop,
+        setContent: avalon.noop,
         /**
          * @config {Function} 重新渲染模板
          * @param m {Object} 重新渲染dialog的配置对象，包括title、content、content中涉及的插值表达式，需要注意的是，title和content不是真正渲染的内容，所以不需要avalon进行扫描监控，定义的时候必须在其前面加上"$",否则组件不会渲染成想要的效果
          */
-        setModel: avalon.noop, 
+        setModel: avalon.noop,
         //@config配置dialog是否显示"取消"按钮，但是如果type为alert，不论showClose为true or false都不会显示"取消"按钮
-        showClose: true, 
+        showClose: true,
         toggle: false, //@config 通过此属性的决定dialog的显示或者隐藏状态
         widgetElement: "", //@config 保存对绑定元素的引用
         container: "body", //@config dialog元素的上下文父元素，container必须是dialog要appendTo的父元素的id或者元素dom对象
@@ -442,7 +422,7 @@ define(["avalon",
         /**
          * @config {Function} 通过此方法配置dialog的footer
          * @param tmp {String} dialog默认模板的footer
-         * @returns {String} 用户自定义的dialog的footer 
+         * @returns {String} 用户自定义的dialog的footer
          */
         getFooter: function(tmp) {
             return tmp
@@ -451,8 +431,8 @@ define(["avalon",
         zIndex: 0, //@config 通过设置vmodel的zIndex来改变dialog的z-index,默认是body直接子元素中的最大z-index值，如果都没有设置就默认的为10
         zIndexIncrementGlobal: 0, //@config 相对于zIndex的增量, 用于全局配置，如果只是作用于单个dialog那么zIndex的配置已足够，设置全局需要通过avalon.ui.dialog.defaults.zIndexIncrementGlobal = Number来设置
         //suyc add 20160822
-        fullScreen:false,
-        returnOrigin:false
+        fullScreenButton:false,
+        returnOriginButton:false
     }
     ////suyc add20160823第二步需要删除 end
     avalon(window).bind("keydown", function(e) {
@@ -468,7 +448,7 @@ define(["avalon",
         if (model) { // 如果m为字符串参数，说明是要在已存在的vmodels中查找对应id的vmodel
             if (avalon.type(model) === 'string') {
                 model = avalon.vmodels[model]
-            } 
+            }
         } else { // 如果没有传递参数m，则返回空vmodel
             model = avalon.define('dialogVM' + setTimeout("1"), function(vm) {
             })
@@ -517,20 +497,26 @@ define(["avalon",
             scrollTop, scrollLeft,
             documentElement,
             top = 0,
-            left = 0
+            left = 0;
+         /*  avalon(maskLayer).attr('style','');
+            avalon(maskLayerSimulate).attr('style','');
+            avalon(target).attr('style','');
+        var element_content = target.firstChild.children[1];
+        var $element_content = avalon(element_content);
+        $element_content.attr('style','');*/
 
         if (!vmodel.toggle) return
 
         documentElement = (document.compatMode && document.compatMode.toLowerCase() == "css1compat") ? document.documentElement : document.body
         // clientWidth和clientHeight在现有浏览器都是兼容的(IE5),但在混杂模式下，得通过documentView属性提供宽度和高度
         clientWidth = document.documentElement.clientWidth ? document.documentElement.clientWidth: document.body.clientWidth
-        
+
         clientHeight = document.documentElement.clientHeight ? document.documentElement.clientHeight: document.body.clientHeight
 
         scrollTop = document.body.scrollTop + document.documentElement.scrollTop
         scrollLeft = documentElement.scrollLeft
 
-        targetOffsetWidth = target.offsetWidth 
+        targetOffsetWidth = target.offsetWidth
         targetOffsetHeight = target.offsetHeight
 
 
@@ -550,7 +536,7 @@ define(["avalon",
             }
         } else {
             if (!isIE6) {
-                vmodel.position = "absolute"    
+                vmodel.position = "absolute"
             }
         }
         if (scroll && vmodel.position == "fixed") return
@@ -575,7 +561,7 @@ define(["avalon",
         }
         $target.css({left: left, top: top})
     }
-   
+
     // 获取body子元素最大的z-index
     function getMaxZIndex() {
         var children = document.body.children,

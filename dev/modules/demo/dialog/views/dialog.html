@@ -27,3 +27,27 @@
         </div>
     </fieldset>
 </div>
+<br>
+<hr>
+<div ms-controller="dialogDemo2">
+    <div>dialog组件嵌套并可以拖曳</div>
+    <fieldset>
+        <legend>嵌套拖曳</legend>
+       <!-- <p>a</p>
+        <p>b</p>-->
+        <button ms-click="show('ss')">打开对话框1</button>
+        <div ms-widget="dialog,ss,$ssOpts">
+            <p>cccccccccc</p>
+            <p>bbbbbbbbbb</p>
+            <button ms-click="show('gg')">打开对话框2</button>
+            <div ms-widget="dialog,gg,$ggOpts">
+                换回来后就会很快更快更好感觉回来了黄金客户
+                <button ms-click="show('mm')">打开对话框3-可以拖曳</button>
+                <div ms-widget="dialog,mm,$mmOpts"  data-dialog-draggable="true"><!-- data-dialog-modal="false" -->
+                    哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈
+                </div>
+            </div>
+        </div>
+        <!--<p>dddddddddddddd</p>-->
+    </fieldset>
+</div>

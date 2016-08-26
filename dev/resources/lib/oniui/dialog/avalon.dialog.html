@@ -5,10 +5,10 @@ MS_OPTION_INNERWRAPPER
 <div class="oni-dialog-inner"></div>
 MS_OPTION_HEADER
 <div class="oni-dialog-header">
-    <div class="oni-dialog-close" ms-if="fullScreen" ms-click="_fullScreen">
+    <div class="oni-dialog-close" ms-if="fullScreenButton" ms-click="_fullScreen">
         <i>全屏</i>
     </div>
-    <div class="oni-dialog-close" ms-if="returnOrigin" ms-click="_returnOrigin">
+    <div class="oni-dialog-close" ms-if="returnOriginButton" ms-click="_returnOrigin">
         <i>还原</i>
     </div>
     <div class="oni-dialog-close" ms-click="_close" ms-if="showClose">
@@ -26,4 +26,4 @@ MS_OPTION_FOOTER
     </div>
 </div>
 MS_OPTION_LAYOUT_SIMULATE
-<div class="aa"></div>
+<div></div><!-- 里面的内容 也就是整个的弹出框最外层的一层-->

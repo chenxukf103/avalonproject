@@ -11,7 +11,7 @@ define(['avalon'],function (avalon) {
         name:"shirly",
         check1:["1"],
         $aaOpts1:{
-            fullScreen:true
+            fullScreenButton:true
         }
     });
     var vm2 = avalon.define({
@@ -32,8 +32,35 @@ define(['avalon'],function (avalon) {
             }
         }
     });
+    var vm3 = avalon.define({
+        $id:"dialogDemo2",
+        show:function (id) {
+            avalon.vmodels[id].toggle = true;
+        },
+        $ssOpts:{
+            title:"层上层的dialog",
+            onConfirm:function () {
+                alert("submit success!");
+            }
+        },
+        $ggOpts:{
+            title:"gg dialog,在ss dialog之上",
+            showClose:false,
+            fullScreenButton:true
+        },
+        $mmOpts:{
+            title:"mm dialog 的tittle",
+            fullScreenButton:true,
+            onConfirm:function () {
+                alert("确定操作，完成之后关闭弹窗");
+            },
+            onClose:function () {
+                alert("取消操作，完成之后关闭弹窗");
+            }
+        }
+    });
     return avalon.controller(function ($ctrl) {
-        $ctrl.$vmodels = [vm,vm2];
+        $ctrl.$vmodels = [vm,vm2,vm3];
         $ctrl.$onEnter = function (param, rs, rj) {
         }
     });
